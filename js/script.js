@@ -14,7 +14,7 @@ function search(){
                 $.each(movies, function(i, data) {
                     $('#movie-list').append(`
                     <div class="col-md-4">
-                        <div class="card mb-4" style="width: 18rem;">
+                        <div class="card mb-4">
                             <img src="${data.Poster}" class="card-img-top">
                             <div class="card-body">
                                 <h6 class="card-title">${data.Title}</h6>
@@ -63,9 +63,13 @@ $('#movie-list').on('click', '.see-detail', function(){
                             <div class="col-md-4">
                                 <img src="${movie.Poster}" class="img-fluid">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-8">
                                 <ul class="list-group">
-                                    <li class="list-group-item">${movie.Title}</li>
+                                    <li class="list-group-item"><h6>${movie.Title}</h6></li>
+                                    <li class="list-group-item">Released : ${movie.Released}</li>
+                                    <li class="list-group-item">Genre : ${movie.Genre}</li>
+                                    <li class="list-group-item">Director : ${movie.Director}</li>
+                                    <li class="list-group-item">Actors : ${movie.Actors}</li>
                                 </ul>
                             </div>
                         </div
