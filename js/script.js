@@ -17,9 +17,9 @@ function search(){
                         <div class="card mb-4" style="width: 18rem;">
                             <img src="${data.Poster}" class="card-img-top">
                             <div class="card-body">
-                                <h5 class="card-title">${data.Title}</h5>
+                                <h6 class="card-title">${data.Title}</h6>
                                 <h6 class="card-subtitle mb-2 text-muted">${data.Year}</h6>
-                                <a href="#" class="btn btn-primary" data-bs-toggle="modal" 
+                                <a href="#" class="btn btn-success see-detail" data-bs-toggle="modal" 
                                 data-bs-target="#exampleModal" data-id="${data.imdbID}">See Detail</a>
                             </div>
                         </div> 
@@ -44,4 +44,36 @@ $('#search-input').on('keyup', function(e) {
     if(e.keyCode === 13){
         search();
     }
+});
+
+$('#movie-list').on('click', '.see-detail', function(){
+    $.ajax({
+        url: 'http://omdbapi.com',
+        type: 'get',
+        dataType: 'json',
+        data: {
+            'apikey' : 'e38cf479',
+            'i' : $(this).data('id')
+        },
+        success: function(movie) {
+            if (movie.Response == "True") {
+                $('.modal-body').html(`
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="${movie.Poster}" class="img-fluid">
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item">${movie.Title}</li>
+                                </ul>
+                            </div>
+                        </div
+                    </div>
+                `);
+            }else{
+
+            }
+        }
+    })
 });
